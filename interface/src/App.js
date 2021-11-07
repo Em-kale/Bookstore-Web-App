@@ -6,15 +6,17 @@ function App() {
   const[data, setData] = useState();
 
   useEffect(()=>{
-      fetch("/api").then((res)=>res.json()).then((data)=>setData(data.message))
-   }
+      fetch("/api").then((res)=>res.json()).then((info)=>setData(info.message))
+
+    }
 )
+
 
   return (
     <div className="App">
       <header className="App-header">
         <p>
-            {data ? {data} : "loading..."}
+        {data ? `${data}` : "loading..."}
         </p>
       </header>
     </div>
