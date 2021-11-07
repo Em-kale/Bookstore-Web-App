@@ -4,6 +4,10 @@ const express = require("express");
 const PORT = process.env.PORT || 3001;
 const app = express(); 
 
+
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../interface/build')));
+
 //create enpoint for API we will use to request information
 //From backend
 //req = reqiest, res = resposne
