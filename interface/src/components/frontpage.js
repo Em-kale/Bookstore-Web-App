@@ -7,17 +7,30 @@ import Button from '@mui/material/Button'
 
 function FrontPage(){
     return(
-        <Grid container spacing={20}>
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-                <Typography>Welcome to Emmitt's Book Shop</Typography>
+        <div style={{display: 'table', width: '100%', height: '100%', margin: 0,}}>
+            <Grid
+            container 
+            alignItems='center'
+            justifyContent='center'
+            spacing={10}
+            >
+                <Grid item xs={12} style={{marginTop: 100, marginBottom: 0}}> 
+                    <Typography
+                     style= {{
+                        color: 'white',
+                        fontFamily: 'Georgia, serif'
+                        }}> 
+                        Hello, welcome to Look Inna Book!<br />Are you a customer or staff?
+                     </Typography>
+                </Grid >
+                <Grid item style={{marginTop: 0}}> 
+                    <Button variant="contained" href="/customer">Customer</Button>
+                </Grid >
+                <Grid item>
+                    <Button variant="contained" href="/staff">Staff</Button>
+                </Grid>
             </Grid>
-            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-                <Button variant="contained" href="/customer">Customer</Button>
-            </Grid>
-            <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
-                <Button variant="contained" href="/staff">Staff</Button>
-            </Grid>
-        </Grid>
+        </div>
     )
 }
 export default FrontPage

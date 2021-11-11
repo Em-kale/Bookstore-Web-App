@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import FrontPage from './components/frontpage'
 import StaffInterface from './components/staffInterface/staffinterface' 
 import CustomerInterface from './components/customerInterface/customerinterface';
-
+import Header from './components/Header/header'
 function App() {
   const[data, setData] = useState();
 
@@ -19,12 +19,9 @@ function App() {
 
 
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <p>
-        {data ? `${data}` : "loading..."}
-        </p>
-      </header> */}
+    <div className="App" 
+    style={{backgroundColor: '#333454', height: '100vh', overflow: 'hidden'}}>
+      <Header />
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<FrontPage />} />
