@@ -24,10 +24,10 @@ function FrontPage(){
                      </Typography>
                 </Grid >
                 <Grid item style={{marginTop: 0}}> 
-                    <Button variant="contained" href="/customer">Customer</Button>
+                    <Button variant="contained" href="/customer-login">Customer</Button>
                 </Grid >
                 <Grid item>
-                    <Button variant="contained" href="/staff">Staff</Button>
+                    <Button variant="contained" href="/staff-login">Staff</Button>
                 </Grid>
             </Grid>
         </div>
