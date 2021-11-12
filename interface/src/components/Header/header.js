@@ -16,9 +16,9 @@ function Header(){
         alignItems = 'center'
         justifyContent = 'flex-start'
         spacing={3}
-         >
+        >
             <Grid item>
-                <MenuBookIcon htmlColor='white'style={{fontSize: 50}} />
+                <MenuBookIcon href="/" htmlColor='white'style={{fontSize: 50}} />
             </Grid>
             <Grid item>
                 <Typography variant='h3'
