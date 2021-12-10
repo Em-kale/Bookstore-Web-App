@@ -11,7 +11,7 @@ app.use(express.static(path.resolve(__dirname, '../interface/build')));
 
 //create enpoint for API we will use to request information
 //From backend
-//req = reqiest, res = resposne
+//req = request, res = resposne
 app.get("/api", (req, res) => {
     res.json({message: "Hello from Server"});
 });
