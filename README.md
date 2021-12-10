@@ -15,3 +15,5 @@ To demo the appllcation as staff, login with credentials:
 user: teststaff
 
 pass: teststaff
+
+Alternatively: create a new account. 

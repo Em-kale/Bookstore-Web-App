@@ -59,7 +59,7 @@ function Login(props){
             <Grid item>
                 <Link underline='hover' color='#7dabf5' href={linkURL}>
                     <Typography color='#7dabf5'>
-                    Register {loginType}
+                    register {loginType}
                     </Typography>
                 </Link>
             </Grid>
