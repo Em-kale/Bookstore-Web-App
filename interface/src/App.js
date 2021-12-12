@@ -15,7 +15,10 @@ function App() {
   const[data, setData] = useState();
 
   useEffect(()=>{
-      fetch("/api").then((res)=>res.json()).then((info)=>setData(info.message))
+      fetch("/api").then((res)=>res.json()).then((info)=>{
+        setData(info.message)
+        console.log(info.message)
+      })
 
     }
 )

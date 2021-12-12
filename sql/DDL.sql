@@ -18,11 +18,12 @@ create table book
     num_of_pages    varchar(10),
     percent_take    varchar(5),
     price   varchar(7),
+    num_of_copies varchar(10),
     primary key (ISBN),
     foreign key (publisher_name) references publisher on delete cascade
 );
 
-create table user
+create table users
 (
     username    varchar(30),
     pass    varchar(30),
@@ -32,24 +33,23 @@ create table user
 
 create table basket_item
 (
-    username    varchar(30).
+    username    varchar(30),
     ISBN   varchar(13),
     primary key (username, ISBN),
-    foreign key (username) references user on delete cascade,
+    foreign key (username) references users on delete cascade,
     foreign key (ISBN) references book on delete set null 
 );
 
 
-create table order
-(
-    order_num   varchar(10),
+create table orders
+(order_num   varchar(10),
     username    varchar(30),
     billing_address varchar(100),
     shipping_address    varchar(100),
     current_location    varchar(100),
     amount  varchar(8),
     primary key (order_num),
-    foreign key (username) references user on delete cascade 
+    foreign key (username) references users on delete cascade 
 );
 
 create table order_book
@@ -57,9 +57,7 @@ create table order_book
     order_num   varchar(10),
     ISBN    varchar(13),
     primary key (order_num, ISBN),
-    foreign key (order_num) references order on delete cascade,
+    foreign key (order_num) references orders on delete cascade,
     foreign key (ISBN) references book on delete cascade
 );
-
-
 
