@@ -1,4 +1,3 @@
-
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -10,19 +9,14 @@ import CustomerInterface from './components/customerInterface/customerinterface'
 import Header from './components/Header/header';
 import CustomerLogin from './components/customerInterface/customerlogin';
 import StaffLogin from './components/staffInterface/stafflogin';
+import StaffRegister from './components/staffInterface/staffregister'
+import CustomerRegister from './components/customerInterface/customerregister'
 
-function App() {
-  const[data, setData] = useState();
-
-  useEffect(()=>{
-      fetch("/api").then((res)=>res.json()).then((info)=>{
-        setData(info.message)
-        console.log(info.message)
-      })
-
-    }
-)
-
+function App(){
+ 
+  const[data, setData] = useState(); 
+  
+  let query = {"type": 'test'}
 
   return (
     <div className="App" 
@@ -35,6 +29,8 @@ function App() {
             <Route path="/staff" element={<StaffInterface/>} />
             <Route path="/customer-login" element={<CustomerLogin/>} />
             <Route path="/staff-login" element={<StaffLogin/>} />
+            <Route path='/register-staff' element={<StaffRegister />} />
+            <Route path='/register-customer' element={<CustomerRegister />} />
             <Route element={FrontPage} />
         </Routes>
       </BrowserRouter>

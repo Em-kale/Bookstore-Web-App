@@ -26,6 +26,7 @@ create table book
 create table users
 (
     username    varchar(30),
+    users_name    varchar(30), 
     pass    varchar(30),
     is_employee boolean, 
     primary key (username)

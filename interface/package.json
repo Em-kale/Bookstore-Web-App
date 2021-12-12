@@ -2,7 +2,7 @@
     "name": "interface",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:3001",
+    "proxy": "http://localhost:3001/",
     "engines": {
         "node": "15.x"
     },
@@ -15,6 +15,7 @@
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
         "@testing-library/user-event": "^12.1.10",
+        "axios": "^0.24.0",
         "nodemon": "^2.0.14",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",

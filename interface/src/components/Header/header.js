@@ -4,9 +4,11 @@ import React from 'react'
 import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Link from '@mui/material/Link'
 
 function Header(){
     return(
+        <Link underline="none" href="/">
         <Grid 
         container
         style={{
@@ -18,7 +20,9 @@ function Header(){
         spacing={3}
         >
             <Grid item>
-                <MenuBookIcon href="/" htmlColor='white'style={{fontSize: 50}} />
+              
+                <MenuBookIcon htmlColor='white'style={{fontSize: 50}} />
+                
             </Grid>
             <Grid item>
                 <Typography variant='h3'
@@ -31,6 +35,7 @@ function Header(){
                 </Typography>
             </Grid>
         </Grid>
+        </Link>
     )
 }
 export default Header; 
