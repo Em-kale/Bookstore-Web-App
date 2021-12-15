@@ -2,7 +2,7 @@
 Project repository for COMP 3005:
 This application is a fictional online book store called Look Inna Book 
 
-use the app at: https://comp3005-databases.herokuapp.com/
+This is web app! You can use the app at: https://comp3005-databases.herokuapp.com/
 
 To demo the application as customer, login with credentials:
 
