@@ -28,6 +28,9 @@ function Login(props){
     const[user, setUser] = useState("")
     const[name, setName] = useState("")
 
+    let axios = require('axios')
+    let config
+    
     const{
         loginType,
         formType
@@ -35,11 +38,26 @@ function Login(props){
     
     function handleSubmit(){
         if(loginType == 'staff'){
-            document.location.href = '/staff'
+            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.true'}
+            //document.location.href = '/staff'
         }
         else if(loginType == 'customer'){
-            document.location.href = '/customer'
+            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.false'}
         }
+        let response
+        axios(config)
+        .then(function (response) {
+            response = (response.data);
+            if(loginType=='staff' && response.status=='true'){
+                document.location.href = '/staff'
+            }
+            else if(loginType=='customer' && response.status=='true'){
+                document.location.href = '/customer'
+            }
+        })
+        .catch(function (error) {
+            console.log("error", error);
+        });
     }
     function handleUserChange(event){
         setUser(event.target.value)
@@ -52,8 +70,6 @@ function Login(props){
     }
 
     function handleRegister(){
-        let axios = require('axios')
-        let config
         if(loginType=='staff'){
             config = {method: 'get', url: '/newuser/' + user + '.' + name + '.' + pass + '.TRUE'}
         }
