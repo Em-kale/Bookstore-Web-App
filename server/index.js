@@ -19,12 +19,12 @@ app.use(express.static(path.resolve(__dirname, '../interface/build')));
 //create enpoint for API we will use to request information
 //From backend
 //req = request, res = resposne
-app.get("newuser/:username.:name.:password.:employee", async (req, res) => {
+app.get("/newuser/:username.:name.:password.:employee", async (req, res) => {
     newUser(req.params.username, req.params.name, req.params.password, req.params.employee); 
     res.json({message: "User added"});
 });
 
-app.get("loginuser/:username.:password.:employee", async(req, res)=> {
+app.get("/loginuser/:username.:password.:employee", async(req, res)=> {
     const message = await loginUser(req.params.username, req.params.password, req.params.employee)
     if(message)
     {   
