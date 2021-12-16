@@ -17,7 +17,7 @@ function Cart(){
     let cartResults; 
 
     useEffect(()=>{
-        let config = {method: 'get', url: '/api/cart/' + sessionStorage.getItem("logged_in") +"/"}
+        let config = {method: 'get', url: '/cart/' + sessionStorage.getItem("logged_in")}
 
             axios(config)
             .then(function (response) {

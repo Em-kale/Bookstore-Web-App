@@ -41,11 +41,11 @@ function Login(props){
     
     function handleSubmit(){
         if(loginType == 'staff'){
-            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.true'}
+            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.true/'}
             //document.location.href = '/staff'
         }
         else if(loginType == 'customer'){
-            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.false'}
+            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.false/'}
         }
         let response
         axios(config)

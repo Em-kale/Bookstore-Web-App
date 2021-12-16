@@ -36,7 +36,7 @@ app.get("/loginuser/:username.:password.:employee", async(req, res)=> {
     }
 })
 
-app.get("/api/search/:searchterm.:searchtype/", async (req, res) => {
+app.get("/search/:searchterm.:searchtype", async (req, res) => {
     const message = await search(req.params.searchterm, req.params.searchtype); 
     if(message){
         console.log("search message", message)
@@ -47,13 +47,13 @@ app.get("/api/search/:searchterm.:searchtype/", async (req, res) => {
     }
 })
 
-app.get("/api/addtocart/:isbn.:username/", (req, res) => {
+app.get("/addtocart/:isbn.:username", (req, res) => {
     console.log("called")
     cartAdd(req.params.isbn, req.params.username)
     res.json({message: "added to cart"})
 })
 
-app.get("/api/cart/:username", async(req, res)=>{
+app.get("/cart/:username", async(req, res)=>{
     let cartArray = await getCart(req.params.username)
     res.json({result: cartArray})
 })

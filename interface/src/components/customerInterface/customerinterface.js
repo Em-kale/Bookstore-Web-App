@@ -53,7 +53,7 @@ function CustomerInterface(){
     }
 
     function handleSubmitSearch(){
-        let config = {method: 'get', url: '/api/search/' + search + "." + selectedValue + "/"}
+        let config = {method: 'get', url: '/search/' + search + "." + selectedValue}
         console.log("searching", config)
         let reply
         axios(config)
@@ -72,7 +72,7 @@ function CustomerInterface(){
     function handleCartAdd(isbn, copies){
         if(copies > 0){
             console.log("ISBN", isbn)
-            let config = {method: 'get', url: '/api/addtocart/' + isbn + "." + sessionStorage.getItem("logged_in") +"/"}
+            let config = {method: 'get', url: '/addtocart/' + isbn + "." + sessionStorage.getItem("logged_in")}
             let reply
             axios(config)
             .then(function (response) {
