@@ -71,7 +71,7 @@ async function newUser(username, name, pass, employee){
     await client.query("insert into users values('" + username + "', '" + name + "', '" + pass + "', '" + employee + "')")
     }
     catch(err){console.log(err)}
-    client.end();
+    ;
 }
 
 async function loginUser(username, password, isEmployee){
@@ -88,24 +88,24 @@ async function loginUser(username, password, isEmployee){
             && res.rows[0].is_employee == eval(isEmployee)){
                 console.log(res)
                 console.log("success");
-                client.end()
+                
                 return "true";
              }
             else{
                
                 console.log("failure")
-                client.end()
+                
                 return "false";
             }
         }
         else{
                 console.log("failure");
-                client.end()
+                
                 return "true";
         }
     }catch(err){
         console.log("sql error", err);
-        client.end(); 
+        ; 
         return "false";
     }
 }
@@ -143,7 +143,7 @@ async function search(search, type){
             searchArray.push(book)     
         }
         console.log("search result:", searchArray)
-        client.end()
+        
        return searchArray
     } catch(err){
         console.log("query error",  err)
@@ -167,7 +167,7 @@ async function cartAdd(isbn, username){
     catch(err){
         console.log(err)
     }
-    client.end();
+    ;
 }
 
 async function getCart(username){
