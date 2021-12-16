@@ -80,8 +80,9 @@ async function loginUser(username, password, isEmployee){
         ssl: {
             rejectUnauthorized: false 
     }});
-    await client.connect();
+ 
     try{
+        await client.connect();
         const res = await client.query('select username, pass, is_employee from users where username =' + "'" + username + "';" )
         if(res.rows[0]){
             if(res.rows[0].username == username && res.rows[0].pass == password
@@ -117,8 +118,9 @@ async function search(search, type){
             rejectUnauthorized: false 
         }
     })
-    await client.connect();
     try{
+        await client.connect();
+
         console.log('search', search);
         console.log('type', type); 
         const res = await client.query("select * from book where lower(" + type + ") = lower('" + search + "');")
@@ -176,8 +178,9 @@ async function getCart(username){
             rejectUnauthorized: false 
         }}
     )
-    await client.connect()
+  
     try{
+        await client.connect()
         //get all isbns + duplicates for how many copies
         //use a join probably
         let res = await client.query("select * from book inner join basket_item on book.isbn = basket_item.isbn where username = '" + username + "';")
