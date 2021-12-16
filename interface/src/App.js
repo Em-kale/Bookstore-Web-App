@@ -11,6 +11,7 @@ import CustomerLogin from './components/customerInterface/customerlogin';
 import StaffLogin from './components/staffInterface/stafflogin';
 import StaffRegister from './components/staffInterface/staffregister'
 import CustomerRegister from './components/customerInterface/customerregister'
+import Cart from './components/customerInterface/cart'
 
 function App(){
  
@@ -31,6 +32,7 @@ function App(){
             <Route path="/staff-login" element={<StaffLogin/>} />
             <Route path='/register-staff' element={<StaffRegister />} />
             <Route path='/register-customer' element={<CustomerRegister />} />
+            <Route path='/cart' element={<Cart />}/>
             <Route element={FrontPage} />
         </Routes>
       </BrowserRouter>
