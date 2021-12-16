@@ -9,7 +9,7 @@ require('dotenv').config()
 
 //set database variables
 
-const postgresql = require('pg');
+const postgresql = require('pg').native; 
 const connection = process.env.CONNECTION; 
 
  
@@ -24,7 +24,7 @@ app.get("/newuser/:username.:name.:password.:employee", async (req, res) => {
     res.json({message: "User added"});
 });
 
-app.get("/loginuser/:username.:password.:employee", async(req, res)=> {
+app.get("/loginuser/:username.:password.:employee/", async(req, res)=> {
     const message = await loginUser(req.params.username, req.params.password, req.params.employee)
     if(message)
     {   
