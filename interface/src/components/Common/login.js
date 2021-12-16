@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
             color: "white"
         },
     },
+    input: {
+        color: 'white', 
+    }
 }));
 
 
@@ -38,20 +41,22 @@ function Login(props){
     
     function handleSubmit(){
         if(loginType == 'staff'){
-            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.true'}
+            config = {method: 'get', url: '/api/loginuser/' + user + "." + pass + '.true'}
             //document.location.href = '/staff'
         }
         else if(loginType == 'customer'){
-            config = {method: 'get', url: '/loginuser/' + user + "." + pass + '.false'}
+            config = {method: 'get', url: '/api/loginuser/' + user + "." + pass + '.false'}
         }
         let response
         axios(config)
         .then(function (response) {
             response = (response.data);
             if(loginType=='staff' && response.status=='true'){
+                sessionStorage.setItem('logged_in', user)
                 document.location.href = '/staff'
             }
             else if(loginType=='customer' && response.status=='true'){
+                sessionStorage.setItem('logged_in', user)
                 document.location.href = '/customer'
             }
         })
@@ -71,10 +76,10 @@ function Login(props){
 
     function handleRegister(){
         if(loginType=='staff'){
-            config = {method: 'get', url: '/newuser/' + user + '.' + name + '.' + pass + '.TRUE'}
+            config = {method: 'get', url: '/api/newuser/' + user + '.' + name + '.' + pass + '.TRUE'}
         }
         else{
-            config = {method: 'get', url: '/newuser/' + user + '.' + name + '.' + pass + '.FALSE'}
+            config = {method: 'get', url: '/api/newuser/' + user + '.' + name + '.' + pass + '.FALSE'}
         }
         axios(config)
         .then(function (response) {
@@ -95,6 +100,7 @@ function Login(props){
                 onChange={handleUserChange}
                 className={classes.textField}
                 label = "username"
+                inputProps={{className: classes.input }}
                 />
             </Grid>
             <>
@@ -106,6 +112,7 @@ function Login(props){
                         className={classes.textField}
                         onChange={handleNameChange}
                         label = "Name"
+                        inputProps={{className: classes.input }}
                         />
                     </Grid>
                     : <></>
@@ -117,6 +124,7 @@ function Login(props){
                 className={classes.textField}
                 onChange={handlePassChange}
                 label = "password"
+                inputProps={{className: classes.input }}
                 />
             </Grid>
             
