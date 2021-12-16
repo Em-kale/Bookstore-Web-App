@@ -10,7 +10,7 @@ require('dotenv').config()
 //set database variables
 
 const postgresql = require('pg')
-const connection = process.env.DATABSE_URL; 
+const connection = process.env.DATABASE_URL; 
 
  
 // Have Node serve the files for our built React app
