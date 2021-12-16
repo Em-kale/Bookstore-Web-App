@@ -9,7 +9,7 @@ require('dotenv').config()
 
 //set database variables
 
-const postgresql = require('pg').native; 
+const postgresql = require('pg')
 const connection = process.env.CONNECTION; 
 
  
