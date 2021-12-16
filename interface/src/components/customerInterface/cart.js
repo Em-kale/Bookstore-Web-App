@@ -6,6 +6,10 @@ import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import Card from '@mui/material/Card'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 function Cart(){
     let axios = require('axios')
@@ -94,11 +98,20 @@ function Cart(){
                         }
                     </Grid>
                 </Grid>
-                <Grid container justifyContent="center" style={{paddingRight: 30}}>
-                    <Grid item>
-                        <Button style={{minWidth: 150, minHeight: 50, marginTop: 50}} variant="contained">Order</Button>
-                    </Grid>
+                <Grid container justifyContent="center" style={{paddingTop: 10}}>
+                <Grid item xs={8}>
+                <Accordion>
+                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Payment and Order Details</AccordionSummary>
+                    <AccordionDetails>
+                        <Grid container justifyContent="center" style={{paddingRight: 30}}>
+                            <Grid item>
+                                <Button style={{minWidth: 150, minHeight: 50, marginTop: 50}} variant="contained">Order</Button>
+                            </Grid>
+                        </Grid>
+                    </AccordionDetails>
+                </Accordion>
                 </Grid>
+                </ Grid>
             </>
             :<>Not Logged In</>
         }
