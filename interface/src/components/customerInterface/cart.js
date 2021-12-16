@@ -99,18 +99,20 @@ function Cart(){
                     </Grid>
                 </Grid>
                 <Grid container justifyContent="center" style={{paddingTop: 10}}>
-                <Grid item xs={8}>
-                <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon/>}>Payment and Order Details</AccordionSummary>
-                    <AccordionDetails>
-                        <Grid container justifyContent="center" style={{paddingRight: 30}}>
-                            <Grid item>
-                                <Button style={{minWidth: 150, minHeight: 50, marginTop: 50}} variant="contained">Order</Button>
-                            </Grid>
-                        </Grid>
-                    </AccordionDetails>
-                </Accordion>
-                </Grid>
+                    <Grid item xs={8}>
+                        <Accordion>
+                            <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                                <Typography>Payment and Order Details</Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                <Grid container justifyContent="center" style={{paddingRight: 30}}>
+                                    <Grid item>
+                                        <Button style={{minWidth: 150, minHeight: 50, marginTop: 50}} variant="contained">Order</Button>
+                                    </Grid>
+                                </Grid>
+                            </AccordionDetails>
+                        </Accordion>
+                    </Grid>
                 </ Grid>
             </>
             :<>Not Logged In</>
