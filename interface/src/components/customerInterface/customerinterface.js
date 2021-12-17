@@ -144,7 +144,10 @@ function CustomerInterface(){
         {
         sessionStorage.getItem("logged_in") ?
         <>
-        <Grid container justifyContent="flex-end" style={{paddingRight: 30}}>
+        <Grid container spacing={2} justifyContent="flex-end" style={{paddingRight: 30}}>
+            <Grid item>
+                    <Button href="/orders" style={{minWidth: 150, minHeight: 50}} variant="contained">Orders</Button>
+            </Grid>
             <Grid item>
                 <Button href="/cart" style={{minWidth: 150, minHeight: 50, marginRight: 0}} variant="contained">Cart</Button>
             </Grid>

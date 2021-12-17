@@ -12,7 +12,7 @@ import StaffLogin from './components/staffInterface/stafflogin';
 import StaffRegister from './components/staffInterface/staffregister'
 import CustomerRegister from './components/customerInterface/customerregister'
 import Cart from './components/customerInterface/cart'
-
+import Orders from './components/customerInterface/orders'
 function App(){
  
   const[data, setData] = useState(); 
@@ -21,7 +21,7 @@ function App(){
 
   return (
     <div className="App" 
-    style={{backgroundColor: '#333454', height: '100vh', overflow: 'hidden'}}>
+    style={{backgroundColor: '#333454', height: '100vh', overflowX: "hidden", overflowY: 'auto'}}>
       <Header />
       <BrowserRouter>
         <Routes>
@@ -33,6 +33,7 @@ function App(){
             <Route path='/register-staff' element={<StaffRegister />} />
             <Route path='/register-customer' element={<CustomerRegister />} />
             <Route path='/cart' element={<Cart />}/>
+            <Route path='/orders' element={<Orders />}/>
             <Route element={FrontPage} />
         </Routes>
       </BrowserRouter>

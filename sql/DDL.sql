@@ -43,7 +43,8 @@ create table basket_item
 
 
 create table orders
-(order_num   varchar(10),
+(
+    order_num   varchar(10),
     username    varchar(30),
     billing_address varchar(100),
     shipping_address    varchar(100),
