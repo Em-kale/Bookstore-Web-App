@@ -15,10 +15,7 @@ import Cart from './components/customerInterface/cart'
 import Orders from './components/customerInterface/orders'
 function App(){
  
-  const[data, setData] = useState(); 
-  
-  let query = {"type": 'test'}
-
+  //return the routing for all pages used in this app and their associated components
   return (
     <div className="App" 
     style={{backgroundColor: '#333454', height: '100vh', overflowX: "hidden", overflowY: 'auto'}}>
