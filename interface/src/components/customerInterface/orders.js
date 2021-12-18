@@ -10,23 +10,27 @@ import { AccordionDetails } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 function Orders(){
     const [orders, setOrders] = useState([])
-
+    //when the order page loads, execute a call to the api endpoint to get
+    //orders
     useEffect(()=>{
         let axios = require('axios')
+        //configure endpoint info
         let config = {method: 'get', url: '/getorders/' + sessionStorage.getItem("logged_in")}
         let orders; 
+        //call endpoint
         axios(config)
         .then(function (response) {
-            //array of orders
+            
             orders = response.data.result; 
             setOrders(orders)
-            //for each order in that array. get array of book
+            
         }
         )
         .catch(function (error) {
             console.log("error", error);
         });
     }, [])
+
     let individualOrder
     let orderDisplay=orders.map((orderArray)=>{
         individualOrder = orderArray.map((order)=>{

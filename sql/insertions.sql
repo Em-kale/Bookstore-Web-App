@@ -16,6 +16,3 @@ insert into book values ('1-86092-025-x', 'Macmillan', 'The Open Boat', 'Stephen
 insert into book values ('1-86092-034-9', 'Penguin', 'The Great Switcheroo', 'Roald Dahl', 'Classic', '568', '12', '14.99','11');
 insert into book values ('1-86092-003-9', 'Hachette', 'The Speckled Band', 'Sir Arthur Conan Doyle', 'Crime', '984', '10', '20.00', '2');
 insert into book values ('1-86092-038-1', 'Macmillan', 'The Signalman', 'Charles Dickens', 'Suspense', '243', '25', '20.00', '1');
-
-select publisher_name from book;
-select username from users;

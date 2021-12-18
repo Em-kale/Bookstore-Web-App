@@ -11,54 +11,61 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import AccordionSummary from '@mui/material/AccordionSummary'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import TextField  from '@mui/material/TextField'
+import Snackbar from '@mui/material/Snackbar'
 
 function Cart(){
     let axios = require('axios')
+    //initialize variables
     const[bookArray, setBookArray] = useState([])
     const[address, setAddress]= useState("")
     const[billingAddress, setBillingAddress] = useState("")
     const[creditNumber, setCreditNumber] = useState("")
     const[securityCode, setSecurityCode] = useState("")
-
+    const[snackbarOpen, setSnackbarOpen] = useState(false)
     let cartResults; 
 
+    //when page loads, call endpoint to get the cart items
     useEffect(()=>{
+        //configure endpoint
         let config = {method: 'get', url: '/cart/' + sessionStorage.getItem("logged_in")}
-
-            axios(config)
-            .then(function (response) {
-                setBookArray(response.data.result); 
-                }
-            )
-            .catch(function (error) {
-                console.log("error", error);
-            });
-            
-            console.log("array", bookArray)
-        
+        //call endpoint and save result to variable
+         axios(config)
+        .then(function (response) {
+            setBookArray(response.data.result); 
+            }
+        )
+        .catch(function (error) {
+            console.log("error", error);
+        });
     }, []);
+
+    //function called to handle an order, and call api endpoint to 
+    //add the order information to database
     function handleOrder(){
         let i = 0
         let amount = 0; 
         let orderNum; 
         //calculate amount minus the percent take for the publisher
         for(i; i < bookArray.length; i++){
-            amount += (bookArray[i].price - bookArray[i].price * (bookArray[i].percent_take)/100)
+            amount += (parseInt(bookArray[i].price) - parseInt(bookArray[i].price) * (parseInt(bookArray[i].percent_take))/100)
         }
-        
+        //check to ensure credit card ans security code are viable and that addresses
+        //have been filled in
         if(creditNumber.length == 16 && securityCode.length == 3 && address.length > 0 
             && billingAddress.length>0){
-            let config = {method: 'get', url: '/order/' + sessionStorage.getItem("logged_in") + "." +  amount + "."
-            + address + "." + billingAddress}
-
+            //configure endpoint info
+            let config = {method: 'get', url: '/order/' + sessionStorage.getItem("logged_in") + "-" +  amount.toString() + "-"
+            + address + "-" + billingAddress}
+            //call api 
             axios(config)
             .then(function (response) {
                 orderNum = response.data.result; 
-                console.log("RESPONSE", response.data);
                 i = 0; 
+                //for each order added, add an order_book item to track which books 
+                //are in which orders
                 for(i; i < bookArray.length; i++){
-                    let config = {method: 'get', url: '/orderbook/' + orderNum + "." + bookArray[i].isbn}
-                   
+                    let config = {method: 'get', url: '/orderbook/' + orderNum + "-" + bookArray[i].isbn}
+                    
                     axios(config)
                     .then(function (response) {
                     })
@@ -66,6 +73,8 @@ function Cart(){
                         console.log("error", error);
                     }); 
                 }
+                //now, one more call to the server to update the copies for the book
+                //just ordered
                 let config = {method: 'get', url: '/updatecopies/' + orderNum}
                         axios(config)
                         .then(function (response) {
@@ -78,22 +87,19 @@ function Cart(){
             .catch(function (error) {
                 console.log("error", error);
             });    
-            
-            
+            //set the snackbar open state to true after completion
+            setSnackbarOpen(true)
         }
         else{
             alert("Invalid Address or Credit Card information. Credit card number must be 16 digits, security code must be 3.")
         }
-
-         //calculate amount minus the percent take for the publisher
-       
-        //reduce number of copies for all books in cart by one
-        //sum the prices of all 
-        //add this order to order
-        //add order number on backend
-        //get order number 
-        //create order book item for each isbn
     }
+    //funciton to set snackbar state to closed when it is closed
+    function handleSnackbarClose(){
+        setSnackbarOpen(false)
+    }
+
+    //functions to track the current content of TextFields
     function handleAddressChange(TextField){
         setAddress(TextField.target.value)
     }
@@ -216,6 +222,12 @@ function Cart(){
                         </Accordion>
                     </Grid>
                 </ Grid>
+                <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                message="Ordered!"
+                />
             </>
             :<>Not Logged In</>
         }

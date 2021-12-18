@@ -8,10 +8,10 @@ import TextField from '@mui/material/TextField'
 import Radio from '@mui/material/Radio'
 import Card from '@mui/material/Card'
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-
+import Snackbar from '@mui/material/Snackbar'
 import { makeStyles, withStyles } from '@mui/styles'
 
-
+//define css styling for components
 const useStyles = makeStyles((theme) => ({
     textField:  {
         "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
         color: "white", 
     }
 }));
-
+//override default radio button colours
 const BlueRadio = withStyles({
     root: {
       color: "#2196f3",
@@ -37,47 +37,62 @@ const BlueRadio = withStyles({
   })((props) => <Radio color="default" {...props} />);
 
 function CustomerInterface(){
+   
     const classes = useStyles(); 
+
+     //initialize variables
     const [selectedValue, setSelectedValue] = useState("book_name")
     const [search, setSearch] = useState("")
     const [searchResultArray, setSearchResultArray] = useState([])
+    const [snackbarOpen, setSnackbarOpen] = useState(false)
 
     let axios = require('axios')
 
+    //set snackbar open state to false
+    function handleSnackbarClose(){
+        setSnackbarOpen(false)
+    }
+
+    //update the filter when it changes
     function handleFilterChange(Radio){
         setSelectedValue(Radio.target.value)
     }
 
+    //update the search variable when it changes
     function handleSearchChange(TextField){
         setSearch(TextField.target.value)
     }
-
+    
+    //call the api endpoint to execute the query to search for books and get result
     function handleSubmitSearch(){
-        let config = {method: 'get', url: '/search/' + search + "." + selectedValue}
-        console.log("searching", config)
+        //configure endpoint info
+        let config = {method: 'get', url: '/search/' + search + "-" + selectedValue}
+        
         let reply
+        //call api amd save result to variable
         axios(config)
         .then(function (response) {
             reply = (response.data);
             setSearchResultArray(reply.status); 
-            console.log("account", sessionStorage.getItem("logged_in"))
-            console.log("response", reply)
         })
         .catch(function (error) {
             console.log("error", error);
         });
-
+     
     }
 
+    //calls api to execute query to add an item to cart
     function handleCartAdd(isbn, copies){
+        //checks to esnure there are copies left to add to cart
         if(copies > 0){
-            console.log("ISBN", isbn)
-            let config = {method: 'get', url: '/addtocart/' + isbn + "." + sessionStorage.getItem("logged_in")}
+            //configure endpoint info
+            console.log("isbn", isbn)
+            let config = {method: 'get', url: '/addtocart/' + isbn + "-" + sessionStorage.getItem("logged_in")}
             let reply
+            //connect to api
             axios(config)
             .then(function (response) {
                 reply = (response.data);
-                console.log("response", reply)
             })
             .catch(function (error) {
                 console.log("error", error);
@@ -86,6 +101,7 @@ function CustomerInterface(){
         else(
             console.log("no copies left")
         )
+        setSnackbarOpen(true)
     }
 
     let searchResults
@@ -128,7 +144,7 @@ function CustomerInterface(){
                             <Grid item style={{marginTop: 10, marginLeft: 20}}>
                                 <Button
                                 variant="contained"
-                                onClick={()=>{handleCartAdd(result.ISBN, result.num_of_copies)}}
+                                onClick={()=>{handleCartAdd(result.isbn, result.num_of_copies)}}
                                 >
                                 Add to Cart</Button>
                             </Grid>
@@ -211,12 +227,25 @@ function CustomerInterface(){
                             onChange={handleFilterChange}/>
                         <Typography className={classes.text}>Author</Typography>
                     </Grid> 
+                    <Grid item>
+                        <BlueRadio 
+                            checked={selectedValue=="publisher_name"} 
+                            value="publisher_name" 
+                            onChange={handleFilterChange}/>
+                        <Typography className={classes.text}>Publisher</Typography>
+                    </Grid> 
                 </Grid> 
             </Grid>
             <Grid direction="row" rowSpacing={3}>
                 {searchResults}
             </Grid>
         </Grid>
+        <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                message="Added to Cart"
+        />
         </>
         :       <>Not Logged In</>
                 }
