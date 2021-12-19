@@ -33,23 +33,24 @@ function Report(props){
             let i; 
             //calculate the total expenses or total revenues
             for(i = 0; i<response.data.result.length; i++){
-                total += parseInt(response.data.result[i].amount); 
+                total += parseFloat(response.data.result[i].amount); 
             }
             setTotalAmount(total); 
         })
         .catch(function (error) {
             console.log("error", error);
         })
-    }
-    }, [type])
+    }}, [type])
 
     //call function in staffInterface to close dialog
     function onClose(){
         handleClose();
     }
-    
+
     //define a variable with all the components for each report
-    let reports=reportArray.map((report)=>{
+    let reports
+    if(reportArray){
+     reports=reportArray.map((report)=>{
         return(
             <Grid container>
                 <Grid item xs={6}>
@@ -61,6 +62,7 @@ function Report(props){
             </Grid>
         )
     })
+    }
     return(
         <Dialog open={open} onBackdropClick={onClose} onClose={onClose}>
             {
