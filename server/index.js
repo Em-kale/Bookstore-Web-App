@@ -101,7 +101,7 @@ async function getReport(type){
         }
         else if(type=="revenue"){
             //make query and save it to variable
-            report = await client.query('select * from orders where cast(amount as int) > 0')
+            report = await client.query('select * from orders where cast(amount as float) > 0')
             //close connection
             client.end()
         }
